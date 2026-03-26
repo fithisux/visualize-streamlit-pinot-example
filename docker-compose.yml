@@ -35,7 +35,7 @@ services:
       - pinot-advanced
 
   pinot-controller:
-    image: apachepinot/pinot:1.4.0
+    image: apachepinot/pinot:latest-25-ms-openjdk
     command: "StartController -zkAddress zookeeper:2181"
     container_name: "pinot-controller"
     hostname: pinot-controller
@@ -58,7 +58,7 @@ services:
       - pinot-advanced
 
   pinot-broker:
-    image: apachepinot/pinot:1.4.0
+    image: apachepinot/pinot:latest-25-ms-openjdk
     command: "StartBroker -zkAddress zookeeper:2181"
     restart: unless-stopped
     container_name: "pinot-broker"
@@ -80,7 +80,7 @@ services:
       - pinot-advanced
 
   pinot-server:
-    image: apachepinot/pinot:1.4.0
+    image: apachepinot/pinot:latest-25-ms-openjdk
     command: "StartServer -zkAddress zookeeper:2181"
     restart: unless-stopped
     container_name: "pinot-server"

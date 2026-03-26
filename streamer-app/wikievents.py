@@ -23,14 +23,19 @@ def acked(err, msg):
     if err is not None:
         print("Failed to deliver message: %s: %s" % (str(msg), str(err)))
     else:
-        print("Message produced: %s" % (str(msg)))
+        ...
+        # print("Message produced: %s" % (str(msg)))
 
 events_processed = 0        
 for event in EventSource(url, headers={"User-Agent": "advanced_pinot_tutorial"}): 
     if event.data:
         data = json.loads(event.data)
+        data['ts'] = data['timestamp'] * 1000
+        del data['timestamp']
+
+        re_data = json.dumps(data)
         producer.poll(0)
-        producer.produce(kafka_topic_name, key=data["meta"]["id"], value=event.data, callback=acked)
+        producer.produce(kafka_topic_name, key=data["meta"]["id"], value=re_data, callback=acked)
 
         events_processed += 1
         if events_processed == 100:

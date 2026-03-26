@@ -41,7 +41,7 @@ select count(*) FILTER(WHERE  ts > ago('PT1M')) AS events1Min,
         distinctcount(user) FILTER(WHERE  ts <= ago('PT1M') AND ts > ago('PT2M')) AS users1Min2Min,
         distinctcount(domain) FILTER(WHERE  ts > ago('PT1M')) AS domains1Min,
         distinctcount(domain) FILTER(WHERE  ts <= ago('PT1M') AND ts > ago('PT2M')) AS domains1Min2Min
-from wikievents 
+from wikievents_REALTIME 
 where ts > ago('PT2M')
 limit 1
 """
@@ -50,6 +50,9 @@ curs = conn.cursor()
 
 curs.execute(query)
 df_summary = pd.DataFrame(curs, columns=[item[0] for item in curs.description])
+
+
+print(df_summary)
 
 # present metrics
 
@@ -73,13 +76,15 @@ metric3.metric(
     delta=float(df_summary['domains1Min'].values[0] - df_summary['domains1Min2Min'].values[0])
 )
 
+print(f"Domains {df_summary['domains1Min'].values[0]}")
+
 # Find all the changes by minute in the last hour
 
 query = """
 select ToDateTime(DATETRUNC('minute', ts), 'yyyy-MM-dd hh:mm:ss') AS dateMin, count(*) AS changes, 
        distinctcount(user) AS users,
        distinctcount(domain) AS domains
-from wikievents 
+from wikievents_REALTIME 
 where ts > ago('PT10M')
 group by dateMin
 order by dateMin desc
@@ -88,6 +93,11 @@ LIMIT 30
 
 curs.execute(query)
 df_ts = pd.DataFrame(curs, columns=[item[0] for item in curs.description])
+
+
+print(df_ts)
+
+
 df_ts_melt = pd.melt(df_ts, id_vars=['dateMin'], value_vars=['changes', 'users', 'domains'])
 
 fig = px.line(df_ts_melt, x='dateMin', y="value", color='variable', color_discrete_sequence =['blue', 'red', 'green'])
