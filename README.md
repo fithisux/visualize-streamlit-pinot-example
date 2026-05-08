@@ -1,16 +1,8 @@
 # Ingest Streaming Data into Apache Pinot
 
-This folder contains the exercises for ingesting streaming data into Apache Pinot Tables.
+## Preparation
 
-## The Exercise
-
-The exercises include:
-
-- Ingest using Kafka
-
-### Ingest using Kafka
-
-Notice that the docker compose file deploys Kafka and Pinot.
+Notice that the docker compose file deploys both Kafka and Pinot.
 
 It is a minimally adpated example from [here](https://docs.pinot.apache.org/start-here/install/docker)
 We will use a python application to ingest wikipedia events and send them to kafka.
@@ -37,7 +29,7 @@ To stop it later, just run
 podman compose down -v
 ```
 
-### Generate data
+## Generate data
 
 For this, we need to run a node app to consume the wikipedia event stream and write it to Kafaka
 First, we will build the (streamer app)[./streamer app] Docker image:
