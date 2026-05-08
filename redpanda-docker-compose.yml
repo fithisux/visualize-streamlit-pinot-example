@@ -121,7 +121,7 @@ services:
       - redpanda-0
 
   zookeeper:
-    image: zookeeper:3.9.4
+    image: zookeeper:3.9.5
     hostname: zookeeper
     container_name: zookeeper
     ports:
@@ -133,7 +133,7 @@ services:
       - pinot-advanced
 
   pinot-controller:
-    image: apachepinot/pinot:1.4.0
+    image: ${PINOT_IMAGE}
     command: "StartController -zkAddress zookeeper:2181"
     container_name: "pinot-controller"
     hostname: pinot-controller
@@ -143,7 +143,7 @@ services:
     ports:
       - "9000:9000"
     environment:
-      JAVA_OPTS: "-Dplugins.dir=/opt/pinot/plugins -Xms1G -Xmx4G -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -Xloggc:gc-pinot-controller.log"
+      JAVA_OPTS: ${JAVA_OPTS}
     depends_on:
       - zookeeper
     healthcheck:
@@ -156,7 +156,7 @@ services:
       - pinot-advanced
 
   pinot-broker:
-    image: apachepinot/pinot:1.4.0
+    image: ${PINOT_IMAGE}
     command: "StartBroker -zkAddress zookeeper:2181"
     restart: unless-stopped
     container_name: "pinot-broker"
@@ -164,7 +164,7 @@ services:
     ports:
       - "8099:8099"
     environment:
-      JAVA_OPTS: "-Dplugins.dir=/opt/pinot/plugins -Xms4G -Xmx4G -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -Xloggc:gc-pinot-broker.log"
+      JAVA_OPTS: ${JAVA_OPTS}
     depends_on:
       pinot-controller:
         condition: service_healthy
@@ -178,7 +178,7 @@ services:
       - pinot-advanced
 
   pinot-server:
-    image: apachepinot/pinot:1.4.0
+    image: ${PINOT_IMAGE}
     command: "StartServer -zkAddress zookeeper:2181"
     restart: unless-stopped
     container_name: "pinot-server"
@@ -187,7 +187,7 @@ services:
       - "8098:8098"
       - "9015:9015"
     environment:
-      JAVA_OPTS: "-Dplugins.dir=/opt/pinot/plugins -Xms4G -Xmx16G -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -Xloggc:gc-pinot-server.log"
+      JAVA_OPTS: ${JAVA_OPTS}
     healthcheck:
       test: [ "CMD-SHELL", "curl -f http://localhost:8097/health/readiness || exit 1" ]
       interval: 30s
