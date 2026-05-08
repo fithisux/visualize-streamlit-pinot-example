@@ -4,8 +4,7 @@
 
 Notice that the docker compose file deploys both Kafka and Pinot.
 
-It is a minimally adpated example from [here](https://docs.pinot.apache.org/start-here/install/docker)
-We will use a python application to ingest wikipedia events and send them to kafka.
+It is a minimally adpated example from [here](https://docs.pinot.apache.org/start-here/install/docker). We will use a python application to ingest wikipedia events and send them to kafka.
 
 Nothing needs to change.
 
@@ -60,6 +59,8 @@ podman run -it --network=pinot-advanced -v ./scripts/wikipedia_events_schema.jso
 ## Changes if you like to use RedPanda
 
 You can also use the corresponding RedPanda docker [compose file](./redpanda-docker-compose.yml)
+
+It was adapted from [here]().
 
 In streamer-app comment this line
 
