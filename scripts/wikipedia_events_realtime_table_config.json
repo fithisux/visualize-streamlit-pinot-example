@@ -20,35 +20,22 @@
       "stream.kafka.decoder.class.name": "org.apache.pinot.plugin.stream.kafka.KafkaJSONMessageDecoder",
       "stream.kafka.consumer.prop.auto.offset.reset": "smallest"
     }
-  }
-},
-"metadata": {},
-"quota": {},
-"routing": {},
-"query": {},
-"ingestionConfig": {
-  "transformConfigs": [
-    {
-      "columnName": "metaJson",
-      "transformFunction": "JSONFORMAT(meta)"
-    },
-    {
-      "columnName": "id",
-      "transformFunction": "JSONPATH(metaJson, '$.id')"
-    },
-    {
-      "columnName": "stream",
-      "transformFunction": "JSONPATH(metaJson, '$.stream')"
-    },
-    {
-      "columnName": "domain",
-      "transformFunction": "JSONPATH(metaJson, '$.domain')"
-    },
-    {
-      "columnName": "topic",
-      "transformFunction": "JSONPATH(metaJson, '$.topic')"
-    }
-  ]
-},
-"isDimTable": false
+  },
+  "metadata": {},
+  "quota": {},
+  "routing": {},
+  "query": {},
+  "ingestionConfig": {
+    "transformConfigs": [
+      {
+        "columnName": "domain",
+        "transformFunction": "JSONPATH(metaJson, '$.domain')"
+      },
+      {
+        "columnName": "topic",
+        "transformFunction": "JSONPATH(metaJson, '$.topic')"
+      }
+    ]
+  },
+  "isDimTable": false
 }
