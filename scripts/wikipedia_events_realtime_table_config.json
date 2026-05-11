@@ -28,6 +28,10 @@
   "ingestionConfig": {
     "transformConfigs": [
       {
+      "columnName": "metaJson",
+      "transformFunction": "JSONFORMAT(meta)"
+      },
+      {
         "columnName": "domain",
         "transformFunction": "JSONPATH(metaJson, '$.domain')"
       },

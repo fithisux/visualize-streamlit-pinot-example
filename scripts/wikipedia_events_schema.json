@@ -2,6 +2,10 @@
   "schemaName": "wikievents",
   "dimensionFieldSpecs": [
     {
+      "name": "metaJson",
+      "dataType": "STRING"
+    },
+    {
       "name": "user",
       "dataType": "STRING"
     },
