@@ -35,20 +35,20 @@ First, we will build the (streamer app)[./streamer app] Docker image:
 
 ``` sh
 podman build -t pinot-advanced/python-streaming-ingest ./streamer-app
-
 ```
 
 and then, we run it
 
-```
+``` sh
 podman run -it  --network=pinot-advanced pinot-advanced/python-streaming-ingest:latest
 ```
 
 For convenience, a consumer app is provided as a debugging means [consumer-app](./consumer-app) 
-that can be run on your PC, so as to verify that Kafka is getting the events. 
-Please use a virtual environment.
 
-You can also achieve similar effect with an (IntelliJ plugin)[https://plugins.jetbrains.com/plugin/21704-confluent].
+``` sh
+podman build -t pinot-advanced/python-kafka-consumer ./consumer-app
+podman run -it  --network=pinot-advanced pinot-advanced/python-kafka-consumer:latest
+```
 
 Now, we can setup Pinot to create a streaming table for this stream
 
@@ -74,7 +74,7 @@ and comment out this line
 # conf = {'bootstrap.servers': 'redpanda-0,redpanda-1,redpanda-2'}
 ```
 
-Change also the bootstrap from
+`consumer-app` needs a similar change. Change also the bootstrap from
 
 ```
 kafka:9092

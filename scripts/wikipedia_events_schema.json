@@ -46,8 +46,8 @@
     {
       "name": "ts",
       "dataType": "LONG",
-      "format": "1:MILLISECONDS:EPOCH",
-      "granularity": "1:MILLISECONDS"
+      "format": "1:SECONDS:EPOCH",
+      "granularity": "1:SECONDS"
     }
   ]
 }
