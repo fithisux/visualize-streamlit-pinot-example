@@ -34,9 +34,11 @@ with EventSource(url, headers=headers) as stream:
          if event.type == 'message':
             try:
                 change = json.loads(event.data)
+                change['ts'] = change['timestamp'] * 1000
+                del change['timestamp']
 
                 producer.poll(0)
-                producer.produce(kafka_topic_name, key=change["meta"]["id"], value=event.data, callback=acked)
+                producer.produce(kafka_topic_name, key=change["meta"]["id"], value=json.dumps(change), callback=acked)
 
                 events_processed += 1
                 if events_processed == 100:

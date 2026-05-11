@@ -34,7 +34,7 @@ For this, we need to run a node app to consume the wikipedia event stream and wr
 First, we will build the (streamer app)[./streamer app] Docker image:
 
 ``` sh
-podman build -t pinot-advanced/python-streaming-ingest ./streamer-app
+podman build -t pinot-advanced/python-streaming-ingest ./producer-app
 ```
 
 and then, we run it
@@ -103,6 +103,5 @@ the wikipedia events table is pupulated by navigating to: [http://localhost:9000
 
 ## Dashboarding
 
-A streamlit dashboarding app is provided based on older code presented [here](https://github.com/pinot-contrib/pinot-docs/blob/latest/tutorials/getting-started/streamlit.md) with slight modifications.
-
-Feel free to study it and run it in a virtual environment.
+A streamlit dashboarding app is provided based on older code presented [here](https://github.com/pinot-contrib/pinot-docs/blob/latest/tutorials/getting-started/streamlit.md) with slight modifications. Feel free to study it and run it in a virtual environment.
+The same dashboard app has been ported to panel. Feel free to study it and run it in a virtual environment.

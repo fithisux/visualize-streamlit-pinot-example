@@ -5,8 +5,8 @@ RUN mkdir -p /opt/app
 WORKDIR /opt/app
 
 COPY requirements.txt ./
-COPY wikievents.py ./
+COPY producer.py ./
 
 RUN pip install -r requirements.txt
 
-CMD [ "python", "wikievents.py" ]
+CMD [ "python", "producer.py" ]
