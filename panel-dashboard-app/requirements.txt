@@ -1,0 +1,6 @@
+pinotdb 
+panel
+jupyter_bokeh
+hvplot
+watchfiles
+nbconvert

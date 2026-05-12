@@ -52,7 +52,7 @@ podman run -it  --network=pinot-advanced pinot-advanced/python-kafka-consumer:la
 
 Now, we can setup Pinot to create a streaming table for this stream
 
-```
+``` sh
 podman run -it --network=pinot-advanced -v ./scripts/wikipedia_events_schema.json:/scripts/wikipedia_events_schema.json -v ./scripts/wikipedia_events_realtime_table_config.json:/scripts/wikipedia_events_realtime_table_config.json apachepinot/pinot:latest-25-ms-openjdk AddTable -schemaFile /scripts/wikipedia_events_schema.json -tableConfigFile /scripts/wikipedia_events_realtime_table_config.json -controllerHost pinot-controller -exec
 ```
 

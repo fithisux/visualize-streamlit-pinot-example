@@ -1,4 +1,0 @@
-streamlit 
-pinotdb 
-plotly 
-pandas
