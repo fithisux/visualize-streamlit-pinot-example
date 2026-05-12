@@ -103,5 +103,12 @@ the wikipedia events table is pupulated by navigating to: [http://localhost:9000
 
 ## Dashboarding
 
-A streamlit dashboarding app is provided based on older code presented [here](https://github.com/pinot-contrib/pinot-docs/blob/latest/tutorials/getting-started/streamlit.md) with slight modifications. Feel free to study it and run it in a virtual environment.
-The same dashboard app has been ported to panel. Feel free to study it and run it in a virtual environment.
+A Panel dashboard, in the form of a Jupyter Notebook is provided. It is advised to create a virtual environment and install the [requirements.txt](panel-dashboard-app\requirements.txt) there. I execute the dashboard in VScodium using this virtual environment as a kernel. 
+
+You can serve it, if you like, is as follows
+
+```sh 
+panel serve .\dashboard.ipynb
+```
+
+Feel free to study the notebook since it uses some advanced concepts from [Panel Streaming Dashoboards](https://panel.holoviz.org/tutorials/basic/build_streaming_dashboard.html)
