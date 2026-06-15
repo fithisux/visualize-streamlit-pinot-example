@@ -1,5 +1,7 @@
 # Ingest Streaming Data into Apache Pinot
 
+**There is an article now**. [Yet another end-to-end streaming dashboarding example](https://dev.to/agileactors/yet-another-end-to-end-streaming-dashboarding-example-43dp)
+
 ## Preparation
 
 Notice that the docker compose file deploys both Kafka and Pinot.
